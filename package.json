@@ -1,7 +1,7 @@
 {
-  "name": "03-api-solid",
+  "name": "template-api-fastify",
   "version": "0.0.1",
-  "description": "API nodejs - Rockeseat - Ignite - 2023 - Projeto 03",
+  "description": "Template para projetos de API com Fastify",
   "main": "server.ts",
   "author": "Pedro Machado de Paula",
   "license": "MIT",
@@ -14,6 +14,7 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.1.1",
     "@types/node": "20.4.0",
+    "@typescript-eslint/eslint-plugin": "5.61.0",
     "@typescript-eslint/parser": "5.61.0",
     "babel-plugin-module-resolver": "5.0.0",
     "eslint": "8.44.0",

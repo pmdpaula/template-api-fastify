@@ -1,37 +1,4 @@
-# API SOLID com Fastify - Rocketseat - Ignite 2023 - Projeto 03
-
-## Aplicação
-
-GymPass style app.
-
-### RFs (Requisitos funcionais)
-
-- [ ] deve ser possível se cadastrar;
-- [ ] deve ser possível se autenticar;
-- [ ] deve ser possível obter o perfil de um usuário logado;
-- [ ] deve ser possível obter o número de check-ins realizados pelo usuário logado;
-- [ ] deve ser possível o usuário obter seu histórico de check-ins;
-- [ ] deve ser possível o usuário buscar academias próximas;
-- [ ] deve ser possível o usuário buscar academais pelo nome;
-- [ ] deve ser possível o usuário realizar check-in em uma academia;
-- [ ] deve ser possível validar o check-in de um usuário;
-- [ ] deve ser possível cadastrar uma academia;
-
-### RNs (Regras de negócio)
-
-- [ ] o usuário não deve poder se cadastrar com um e-mail duplicado;
-- [ ] o usuário não pode fazer 2 check-ins no mesmo dia;
-- [ ] o usuário não pode fazer check-in se não estiver perto (100m) da academia;
-- [ ] o check-in só pode ser validado até 20 minutos após criado;
-- [ ] o check-in só pode ser validado por administradores;
-- [ ] a academia só pode ser cadastrada por administradores;
-
-### RNFs (Requisitos não-funcionais)
-
-- [ ] a senha do usuário precisa estar criptografada;
-- [ ] os dados da aplicação precisam estar persistdiso em um banco PostgreSQL;
-- [ ] todas as listas de dados precisam estar paginadas com 20 itens por página;
-- [ ] o usuário deve ser identificado com um JWT (JSON Web Token);
+# Template para projetos de API com Fastify
 
 ## Configuração
 
@@ -68,7 +35,7 @@ yarn add -D eslint prettier eslint-config-prettier
 [Ordenar as importações - eslint-plugin-import](https://github.com/import-js/eslint-plugin-import/)
 
 ```
-yarn add -D eslint-plugin-import @typescript-eslint/parser eslint-import-resolver-typescript eslint-import-resolver-babel-module eslint-plugin-module-resolver
+yarn add -D eslint-plugin-import @typescript-eslint/parser eslint-import-resolver-typescript eslint-import-resolver-babel-module eslint-plugin-module-resolver @typescript-eslint/eslint-plugin
 ```
 
 ver configurações necessárias do `eslint-import-resolver-typescript` para funcionar correto com o path mapping
@@ -101,6 +68,41 @@ Este plugin pede para que coloque a ordenação que queremos no arquivo `.pretti
 yarn add -D babel-plugin-module-resolver
 ```
 
+### Path mapping
+
+Mapeamento dos diretórios usando o babel-plugin-module-resolver.
+Exemplo do que foi feito.
+
+No arquivo `babel.config.js` foi adicionado as seguintes linhas:
+```javascript
+...
+plugins: [
+      ['module-resolver', {
+        root: ['./src'],
+        alias: {
+          '@assets': './src/assets',
+          '@components': './src/components',
+          '@screens': './src/screens',
+          '@types': './src/types',
+        }
+      }]
+    ]
+
+```
+
+No arquivo `tsconfig.json` foi adicionado as seguintes linhas:
+```javascript
+...
+"baseUrl": "./",
+    "paths": {
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@screens/*": ["./src/screens/*"],
+      "@types/*": ["./src/@types/*"],
+    }
+```
+
+
 
 
 - [Atualização de pacotes por bot do Github - renovate](https://docs.renovatebot.com/)
@@ -115,7 +117,9 @@ yarn add -D babel-plugin-module-resolver
 yarn add fastify
 ```
 
-[Variáveis de ambiente - dotenv](https://www.npmjs.com/package/dotenv)
+
+
+- [Variáveis de ambiente - dotenv](https://www.npmjs.com/package/dotenv)
 
 ```bash
 yarn add dotenv
@@ -123,36 +127,33 @@ yarn add dotenv
 
 Será usado o arquivo `env/index.ts` para fazer as validações das variáveis de ambiente.
 
-[Validação de dados - zod](https://www.npmjs.com/package/zod)
+
+
+- [Validação de dados - zod](https://www.npmjs.com/package/zod)
 
 ```bash
 yarn add zod
 ```
 
-### Pacotes de exibição
 
-[Exibição de texto - fast-printf](https://www.npmjs.com/package/fast-printf)
 
-```bash
-yarn add fast-printf
-```
-
-[Animação de texto - chalk-animation](https://github.com/bokub/chalk-animation)
+- [ORM (Object Relational Mapper) - Query builder - Prisma](https://www.prisma.io/docs/getting-started/quickstart)
 
 ```bash
-yarn add chalk-animation
-yarn add -D @types/chalk-animation
+yarn add -D prisma
 ```
 
-[Barra de progresso - cli-progress](https://www.npmjs.com/package/cli-progress)
+>Inicia a configuração do prisma
+>
+>```bash
+>npx prisma init
+>```
+
+Após a configuração modelo de dados, rodar o comando a seguir para gerar os códigos para manipular os modelos no banco.
 
 ```bash
-yarn add cli-progress
-yarn add -D @types/cli-progress
+npx prisma generate
 ```
+-- Este comando também vai instalar o pacote `@prisma/client` que é o que vai ser usado para manipular os dados no banco.
+Instalaria o `prisma` se já não tivesse instalado.
 
-[Texto em cores - colors](https://github.com/Marak/colors.js)
-
-```bash
-yarn add colors
-```
