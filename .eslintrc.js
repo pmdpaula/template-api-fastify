@@ -22,6 +22,7 @@ module.exports = {
     "@typescript-eslint",
   ],
   "rules": {
+    // "@typescript-eslint/ban-ts-comment": "off",
     "indent": ["warn", 2],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
